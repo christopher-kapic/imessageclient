@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+/* Mobile CSS */
+body {
+  display: grid;
+  grid-template-columns: 250px calc(100% - 250px);
+}
+
+div {
+  background-color: rgb(30,30,30);
+  padding: 6px;
+  border-bottom-style: solid;
+  border-width: 1px;
+  border-color: rgb(154,154,154);
+}
+
+div div {
+  padding: 0px;
+  border-width: 0px;
+}
+
+#contact-input {
+  width: calc(100% - 40px);
+}
+
+#contact {
+  display: inline-flex;
+}
+
+#contact p {
+  margin-left: 6px;
+}
+
+#conversations, #active-con {
+  background-color: blue;
+  height: 10px;
+}
+
+/* Tablet CSS */
+@media (min-width: 415px) {
+}
+
+/* Desktop CSS */
+@media (min-width: 1024px) {
+}
