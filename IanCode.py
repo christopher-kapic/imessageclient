@@ -11,15 +11,17 @@ import sqlite3
 import re
 import os
 import sys
+import json
 
+start_time = datetime.now()
 
 ######################################################################
 ################################ Constants ###########################
 
 
 
-NUM_CONVERSATIONS = 3
-NUM_MESSAGES = 5
+NUM_CONVERSATIONS = 20
+NUM_MESSAGES = 50
 
 
 
@@ -33,7 +35,7 @@ NUM_MESSAGES = 5
 
 ######################################################################
 ############################## Objects ###############################
-class Conversation():
+class Conversation(object):
 	def __init__(self, contact, handleId):
 		self.contact = contact
 		self.handleId = handleId
@@ -58,6 +60,9 @@ class Conversation():
 		messages.reverse()
 		self.messages = messages
 
+	def json(self):
+		return json.dumps(self.__dict__)
+
 
 
 
@@ -70,7 +75,7 @@ def connectToDatabase():
 	output = Popen(f"whoami", shell=True, stdout=PIPE).stdout
 	IAm = output.read().decode("utf-8").strip()
 
-	# Relevant tables are "handle" and "message"
+	# Relevant tables are "handle", "message", "chat"
 	conn = sqlite3.connect(f'/Users/{IAm}/Library/Messages/chat.db')
 	return conn
 
@@ -100,16 +105,19 @@ def getName(id):
 ############################### Script ###############################
 
 
-
+# Connect to chat.db database
 conn = connectToDatabase()
 c = conn.cursor()
 
 
+
+# Collect messages from the database (This is used to find the people most recently texted with.)
 today = str(datetime.today()).split()[0].split('-')
 lastMonth = f'{today[0]}-0{str(int(today[1])-1)}-{today[2]}'
-c.execute(f"SELECT handle_id, is_from_me FROM message WHERE datetime(message.date/1000000000 + strftime('%s', '2001-01-01') ,'unixepoch','localtime') > {lastMonth};")
+c.execute(f"SELECT handle_id,is_from_me FROM message WHERE datetime(message.date/1000000000 + strftime('%s', '2001-01-01') ,'unixepoch','localtime') > '{lastMonth}';")
 data = c.fetchall()
 data.reverse()
+
 
 
 
@@ -117,10 +125,9 @@ handleIds = []
 for m in data:
 	if len(handleIds) == NUM_CONVERSATIONS:
 		break
-	if m[0] in handleIds:
-		pass
-	else:
+	elif m[0]:
 		handleIds.append(m[0])
+
 
 
 
@@ -138,30 +145,29 @@ for i in range(len(handleIds)):
 
 
 
+
 for convo in conversations:
-	c.execute(f"SELECT is_from_me, text FROM message WHERE handle_id={convo.handleId};")
+	c.execute(f"SELECT is_from_me, text FROM message WHERE handle_id={convo.handleId} and datetime(message.date/1000000000 + strftime('%s', '2001-01-01') ,'unixepoch','localtime') > '{lastMonth}';")
 	data = c.fetchall()
 	data.reverse()
 	convo.addMessages(data[0:NUM_MESSAGES])
 
 
 
-for convo in conversations:
-	print(convo)
-	print('\n\n')
+# To see JSON in Terminal
+# for convo in conversations:
+# 	print()
+# 	print(convo.json())
+# 	print()
+
+
 
 
 
 ######################################################################
 
 
-
-
-
-
-
-
-
+print(datetime.now() - start_time)
 
 
 
