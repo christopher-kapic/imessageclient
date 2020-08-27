@@ -36,8 +36,32 @@ div div {
 }
 
 #conversations, #active-con {
-  background-color: blue;
-  height: 10px;
+  background-color: rgb(30,30,30);
+  height: auto;
+}
+
+#conversations {
+  padding: 0px;
+}
+
+.conversation-contact {
+  color: white;
+  font-size: 20px;
+  padding: 4px;
+  padding-bottom: 0px;
+}
+
+.conversation-latest {
+  color: rgb(154,154,154);
+  font-size: 16px;
+  max-height: 56px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 4px;
+  padding-top: 2px;
+  border-bottom-width: 1px;
+  border-bottom-color: rgb(154,154,154);
+  border-bottom-style: solid;
 }
 
 /* Tablet CSS */
