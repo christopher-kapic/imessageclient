@@ -1,14 +1,12 @@
 from app import app
 from flask import render_template
 
+
+
 import sqlite3
 from subprocess import Popen, PIPE
 from datetime import datetime
 import json
-
-
-
-
 
 
 
@@ -19,7 +17,6 @@ def index():
 
 @app.route("/api/init")
 def load_init():
-	# This function needs to return the JSON document with all of the conversations. I'm not sure the best way to do that (whether I should restructure/copy/paste the code you've written or if I should call IanCode.py)
 	NUM_CONVERSATIONS = 20
 	NUM_MESSAGES = 50
 
@@ -61,6 +58,33 @@ def load_init():
 	return json_string
 
 
+@app.route("/api/message")
+def send_message(json):
+	message = json.loads(json)
+	r = message["recipient"]
+	t = message["text"]
+
+	tell = f'tell application "Messages"\n'
+	myTry = f'try\n'
+	sendText = f'send "{t}" to buddy "{r}"\n'
+	onError = f'on error\n'
+	delay = f'delay 5\n'
+	endTry = f'end try\n'
+	endTell = f'end tell'
+	appleScript = f'{tell}{myTry}{sendText}{onError}{delay}{sendText}{endTry}{endTell}'
+
+	output = Popen(f"osascript -e '{appleScript}'", shell=True, stdout=PIPE).stdout
+	oStr = output.read().decode('utf-8').strip()
+
+	if oStr == '':
+		# This means it worked properly no error
+		return 0
+	elif 'error' in oStr.lower():
+		# This means there was an error. We can work on distinguishing errors and returning distinct error values/messages later if you want.
+		return 1
+	else:
+		# This means something happend and I'm not sure if its an error or if the text managed to send and there's just something else going on that being reported. We can investigate this later if you want too.
+		return 2
 
 
 
