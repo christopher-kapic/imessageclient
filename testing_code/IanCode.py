@@ -4,12 +4,8 @@
 
 
 import sqlite3
-from subprocess import *
-from datetime import *
-import sqlite3
-import re
-import os
-import sys
+from subprocess import Popen, PIPE
+from datetime import datetime
 import json
 
 # start_time = datetime.now() # For Timing Purposes
@@ -66,7 +62,7 @@ def connectToDatabase():
 
     # Relevant tables are "handle", "message", "chat"
     conn = sqlite3.connect(f"/Users/{IAm}/Library/Messages/chat.db")
-    return conn
+    return conn, "test string"
 
 
 def getName(id):
@@ -98,7 +94,7 @@ def timeToFloat(time):
 
 
 # Connect to chat.db database
-conn = connectToDatabase()
+conn, x = connectToDatabase()
 c = conn.cursor()
 
 
@@ -150,12 +146,15 @@ for convo in conversations:
     data = c.fetchall()
     convo.addMessages(data[-NUM_MESSAGES:])
 
+json_string = json.dumps([convo.__dict__ for convo in conversations])
+print(json_string)
+
 
 # To see JSON in Terminal
 # for convo in conversations:
-#     print()
-#     print(convo.json())
-#     print()
+#   print()
+#   print(convo.json())
+#   print()
 
 
 ######################################################################
@@ -164,4 +163,6 @@ for convo in conversations:
 # print('Total Run Time:', tRunTime) # For Timing Purposes
 # print('Conversations Time:', convo_time) # For Timing Purposes
 # print(timeToFloat(tRunTime)-timeToFloat(convo_time)) # For Timing Purposes
+
+print()
 
