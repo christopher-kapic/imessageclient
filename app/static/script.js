@@ -1,5 +1,5 @@
 function firstLoadMessages() {
-    alert("The URL is the following: ");
+    alert("The URL is the following: " + window.location.href);
 }
 
 function showAlert() {
