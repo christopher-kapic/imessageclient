@@ -3,6 +3,6 @@ function firstLoadMessages() {
 }
 
 function showAlert() {
-    alert("The URL is: ");
+    alert("The URL is next: ");
 }
 
