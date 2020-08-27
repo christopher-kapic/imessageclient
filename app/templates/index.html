@@ -6,16 +6,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
-  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
   <title>iMessage</title>
 </head>
 
-<body>
+<body onload="showAlert()">
   <div id="search">
     <div>
       <p></p>
       <input type="text" placeholder="Search" id="contact-input">
-      <button><img src="https://cdn0.iconfinder.com/data/icons/set-app-incredibles/24/Edit-01-512.png" alt=""
+      <button onclick="showAlert()"><img
+          src="https://cdn0.iconfinder.com/data/icons/set-app-incredibles/24/Edit-01-512.png" alt=""
           style="max-width: 10px;"></button>
     </div>
   </div>
@@ -31,6 +32,6 @@
     <!-- for message in messages-of-open-conversation, display message -->
   </div>
 </body>
-<script src="script.js"></script>
+<script src="{{ url_for('static',filename='styles/script.js') }}"></script>
 
 </html>
