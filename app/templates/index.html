@@ -7,10 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+  <script src="{{ url_for('static',filename='script.js') }}"></script>
   <title>iMessage</title>
 </head>
 
-<body onload="showAlert()">
+<body onload="firstLoadMessages()">
   <div id="search">
     <div>
       <p></p>
@@ -32,6 +33,6 @@
     <!-- for message in messages-of-open-conversation, display message -->
   </div>
 </body>
-<script src="{{ url_for('static',filename='styles/script.js') }}"></script>
+
 
 </html>
