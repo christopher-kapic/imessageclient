@@ -1,5 +1,5 @@
 function firstLoadMessages() {
-    alert("The URL is::: ");
+    alert("The URL is the following: ");
 }
 
 function showAlert() {
