@@ -7,14 +7,14 @@ function loadConversation(cont) {
         if (global_data[i]["contact"] == cont) {
             for (const message of global_data[i]["messages"]) {
                 if (message[0] == 0) { // other person
-                    document.getElementById("message-box").innerHTML += '<p>' + message[1] + '</p>';
+                    document.getElementById("message-box").innerHTML += '<p class="from-other">' + message[1] + '</p>';
                 } else { // user
-                    document.getElementById("message-box").innerHTML += '<p>' + message[1] + '</p>';
+                    document.getElementById("message-box").innerHTML += '<p class="from-user">' + message[1] + '</p>';
                 }
             }
         }
     }
-    document.getElementById("pending-message-text").addEventListener('submit', sendText);
+
 }
 
 function firstLoadMessages() {
@@ -54,3 +54,4 @@ function showAlert() {
     alert("Hello World!");
 }
 
+document.getElementById("pending-message-text").addEventListener('submit', sendText);
