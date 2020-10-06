@@ -7,9 +7,9 @@ function loadConversation(cont) {
         if (global_data[i]["contact"] == cont) {
             for (const message of global_data[i]["messages"]) {
                 if (message[0] == 0) { // other person
-                    document.getElementById("message-box").innerHTML += '<p class="from-other">' + message[1] + '</p>';
+                    document.getElementById("message-box").innerHTML += '<div class="holder"><p class="from-other">' + message[1] + '</p></div>';
                 } else { // user
-                    document.getElementById("message-box").innerHTML += '<p class="from-user">' + message[1] + '</p>';
+                    document.getElementById("message-box").innerHTML += '<div class="holder><p class="from-user">' + message[1] + '</p></div/';
                 }
             }
         }
@@ -39,19 +39,38 @@ function firstLoadMessages() {
 }
 
 function sendText() {
-    let mymes = document.getElementById("pending-message-text").value;
-    fetch("/api/message", {
-        method: 'POST',
-        body: {
-            "recipient": "Ian Cramer",
-            "text": mymes
-        }
-    })
+    alert("ALERT0");
+    // mes = document.getElementById("pending-message-text").target.value;
+    // alert("ALERT1");
+    // fetch("/api/message", {
+    //     method: 'POST',
+    //     body: {
+    //         "recipient": "Ian Cramer",
+    //         "text": "test"
+    //     }
+    // })
 
 }
 
 function showAlert() {
-    alert("Hello World!");
+    mes = document.getElementById("pending-message-text").value;
+    alert(mes)
+    fetch("/api/message", {
+        method: 'POST',
+        body: JSON.stringify({
+            "recipient": "Ian Cramer",
+            "text": mes
+        })
+    })
 }
 
-document.getElementById("pending-message-text").addEventListener('submit', sendText);
+// document.getElementById("pending-message-text").addEventListener('submit', sendText);
+
+// var content_of_message = document.getElementById("pending-message-text");
+// content_of_message.addEventListener("keyup", (e) => {
+//     e.preventDefault();
+//     if (e.keyCode === 13) {
+//         alert("hi")
+//         sendText(content_of_message.target.value);
+//     }
+// })

@@ -95,7 +95,7 @@ div div {
   border-radius: 10px;
   padding-left: 4px;
   padding-right: 4px;
-  margin: 4px;
+  margin: 8px;
   border-width: 1px;
   border-color: rgb(154,154,154);
   outline-style: none;
@@ -106,26 +106,40 @@ div div {
   width: 100%;
 }
 
+.holder {
+  width: calc(100vw - 150px);
+  height: auto;
+  padding: 0px;
+  margin: 0px;
+}
+
 .from-other {
   background-color: rgb(85, 85, 85);
   padding: 4px;
   border-radius: 10px;
-  position: relative;
   left: 0px;
   max-width: 400px;
-  margin: 4px;
+  margin: 6px;
 }
 
 .from-user {
   background-color: rgb(38, 102, 208);
   padding: 4px;
   border-radius: 10px;
-  position: relative;
+  left: 0px;
+  max-width: 400px;
+  margin: 6px;
+}
+
+/* .from-user {
+  background-color: rgb(38, 102, 208);
+  padding: 4px;
+  border-radius: 10px;
   right: 0px;
   max-width: 400px;
-  margin: 4px;
-  text-align: right;
-}
+  margin: 6px;
+  /* text-align: right; */
+/* }  */
 
 /* Tablet CSS */
 @media (min-width: 415px) {
