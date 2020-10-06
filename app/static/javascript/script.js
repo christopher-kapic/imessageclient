@@ -54,14 +54,15 @@ function sendText() {
 
 function showAlert() {
     mes = document.getElementById("pending-message-text").value;
-    alert(mes)
+    // alert(mes)
     fetch("/api/message", {
         method: 'POST',
         body: JSON.stringify({
-            "recipient": "Ian Cramer",
+            "recipient": "Christopher Kapic",
             "text": mes
         })
     })
+    document.getElementById("pendint-message-text").value = "";
 }
 
 // document.getElementById("pending-message-text").addEventListener('submit', sendText);
