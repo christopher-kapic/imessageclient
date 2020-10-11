@@ -17,6 +17,19 @@ function loadConversation(cont) {
 
 }
 
+function startConversation() {
+    contact_ = window.prompt("To:", "contact");
+    message_ = window.prompt("Message:", "");
+    fetch("/api/message", {
+        method: 'POST',
+        body: JSON.stringify({
+            "recipient": contact_,
+            "text": message_
+        })
+    })
+    firstLoadMessages();
+}
+
 function firstLoadMessages() {
     fetch("/api/init")
         .then(res => {
