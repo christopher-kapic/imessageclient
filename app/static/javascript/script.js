@@ -78,6 +78,10 @@ function showAlert() {
     document.getElementById("pendint-message-text").value = "";
 }
 
+function getRecipient() {
+
+}
+
 // document.getElementById("pending-message-text").addEventListener('submit', sendText);
 
 // var content_of_message = document.getElementById("pending-message-text");
