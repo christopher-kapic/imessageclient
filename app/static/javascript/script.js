@@ -27,7 +27,7 @@ function startConversation() {
             "text": message_
         })
     })
-    firstLoadMessages();
+    // firstLoadMessages();
 }
 
 function firstLoadMessages() {
